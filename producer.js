@@ -49,10 +49,105 @@ var pending_tx_list = []
 var energy_KWH = 0; var prev_energy_KWH = 0; var difference = 0;
 var producer; var consumer;
 
-// Contract Deployment
-var abi = [{"constant":false,"inputs":[{"name":"_account","type":"address"}],"name":"token_balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_account","type":"address"}],"name":"eth_balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_account","type":"address"},{"name":"amount","type":"uint256"}],"name":"send_eth","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_account","type":"address"},{"name":"amount","type":"uint256"}],"name":"update_tokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
-var contract_address = "0x2adb50899a9110682909d61e5407a791f45459c4" ;   //this is the token generation and ether sending contract
-var obj = web3.eth.contract(abi).at("0x2adb50899a9110682909d61e5407a791f45459c4");
+// Smart Contract for generation of Virtual Energy Tokens and Automate transactions
+var abi = [
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+     "name": "token_balance",
+     "outputs": [
+       {
+         "name": "",
+         "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balances",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "eth_balance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address"
+        },
+        {"name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "send_eth",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address"
+      },
+      {"name": "amount",
+      "type": "uint256"
+    }
+  ],
+  "name": "update_tokens",
+  "outputs": [],
+  "payable": false,
+  "stateMutability": "nonpayable",
+  "type": "function"
+}
+]
+// Contract Address obtained after deploying contract from 'Remix Solidity Compiler'
+// This is the token generation and ether sending contract
+var contract_address = "0xbccc53572694ea920a4bf3070b4780a7892855a2" ;   
+// Contract Object Creation at Contract Address
+var obj = web3.eth.contract(abi).at("0xbccc53572694ea920a4bf3070b4780a7892855a2");
 
 // Web3 setup
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));

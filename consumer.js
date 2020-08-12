@@ -46,11 +46,104 @@ var accept_deal_flag = 0; var block_deal_flag = 1;
 var pending_tx_list = []
 var producer; var consumer;
 
-// Smart Contract Deployment for generation of Virtual Energy Tokens and Automate transactions
-var abi = [{"constant":false, "inputs":[{"name":"_account", "type":"address"}], "name":"token_balance", "outputs":[{"name":"", "type":"uint256"}], "payable":false, "stateMutability":"nonpayable", "type":"function"}, {"constant":true, "inputs":[{"name":"", "type":"address"}], "name":"balances", "outputs":[{"name":"", "type":"uint256"}], "payable":false, "stateMutability":"view", "type":"function"}, {"constant":true, "inputs":[{"name":"_account", "type":"address"}], "name":"eth_balance", "outputs":[{"name":"", "type":"uint256"}], "payable":false, "stateMutability":"view", "type":"function"}, {"constant":false, "inputs":[{"name":"_account", "type":"address"}, {"name":"amount", "type":"uint256"}], "name":"send_eth", "outputs":[], "payable":true, "stateMutability":"payable", "type":"function"}, {"constant":false, "inputs":[{"name":"_account", "type":"address"}, {"name":"amount", "type":"uint256"}], "name":"update_tokens", "outputs":[], "payable":false, "stateMutability":"nonpayable", "type":"function"}]
-var contract_address = "0xf38bd3265c7a3896e336c6442c24b0b6503c70a8";
+// Smart Contract for generation of Virtual Energy Tokens and Automate transactions
+var abi = [
+            {
+              "constant": false,
+              "inputs": [
+                {
+                  "name": "_account",
+                  "type": "address"
+                }
+              ],
+               "name": "token_balance",
+               "outputs": [
+                 {
+                   "name": "",
+                   "type": "uint256"
+                  }
+                ],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+              },
+              {
+                "constant": true,
+                "inputs": [
+                  {
+                    "name": "",
+                    "type": "address"
+                  }
+                ],
+                "name": "balances",
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+              },
+              {
+                "constant": true,
+                "inputs": [
+                  {
+                    "name": "_account",
+                    "type": "address"
+                  }
+                ],
+                "name": "eth_balance",
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+              },
+              {
+                "constant": false,
+                "inputs": [
+                  {
+                    "name": "_account",
+                    "type": "address"
+                  },
+                  {"name": "amount",
+                  "type": "uint256"
+                }
+              ],
+              "name": "send_eth",
+              "outputs": [],
+              "payable": true,
+              "stateMutability": "payable",
+              "type": "function"
+            },
+            {
+              "constant": false,
+              "inputs": [
+                {
+                  "name": "_account",
+                  "type": "address"
+                },
+                {"name": "amount",
+                "type": "uint256"
+              }
+            ],
+            "name": "update_tokens",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ]
+// Contract Address obtained after deploying contract from 'Remix Solidity Compiler'
+var contract_address = "0xbccc53572694ea920a4bf3070b4780a7892855a2";
 // Contract Object Creation at Contract Address
-var obj = web3.eth.contract(abi).at("0xf38bd3265c7a3896e336c6442c24b0b6503c70a8");
+var obj = web3.eth.contract(abi).at("0xbccc53572694ea920a4bf3070b4780a7892855a2");
 
 // Web3 setup
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
