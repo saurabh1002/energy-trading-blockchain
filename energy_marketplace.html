@@ -1,0 +1,276 @@
+<!--  @file       energy_marketplace.html
+*     @authors    Saurabh Gupta     [saurabh.gupta1002@gmail.com]
+*                 Awadhut Thube     [awadhutthube@gmail.com]
+*                 Jheel Nagaria     [nagariajheel@gmail.com]
+*                 Ashish Kamble     [ashishkamble14@gmail.com]
+*-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CoE Blockchain</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="./public/css/bootstrap.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="./public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./public/css/style.css" rel="stylesheet">
+    <script src="./server.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/node_modules/web3/dist/web3.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+          <a class="navbar-brand" href="#"><img src="./public/images/logo.png" alt="Green Blocks" width="122" height="60"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="defaultNavbar1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" class="btn btn-success"  data-toggle="modal" data-target="#sell">SELL</a></li>
+            <li><a href="#" class="btn btn-info"  data-toggle="modal" data-target="#buy">BUY</a></li>
+            <li><a href="#" class="button" onclick="close_connection();">Close connection</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>Current bids</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid0"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken0"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer0"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer0"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_0();">Bid</button>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid1"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken1"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer1"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer1"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_1();">Bid</button>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid2"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken2"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer2"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer2"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_2();">Bid</button>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid3"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken3"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer3"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer3"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_3();">Bid</button>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid4"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken4"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer4"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer4"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_4();">Bid</button>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="card">
+              <h3 id="latest_bid5"></h3>
+              <div class="stats">
+                <div class="line clearfix"><div>Energy tokens available</div><span id="Etoken5"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Seller Address</div><span id="producer5"></span><br class="clearBoth"></div>
+                <div class="line clearfix"><div>Buyer Address</div><span id="consumer5"></span><br class="clearBoth"></div>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="bid_for_producer_5();">Bid</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Modal -->
+    <div id="buy" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">BUY</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Account Address" oneKeyup="checkform();" id="consumer_address">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal" onclick="Enter_bid();">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="sell" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">SELL</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Account Address" id="producer_address">
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Base Bid" id="base_value">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="broadcast_seller_info();">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="./public/js/jquery-1.11.3.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./public/js/bootstrap.js"></script>
+    <script src="./public/js/script.js"></script>
+
+    <script>
+      var address;
+      var value;
+      var bid_value = [];
+      var address_seller;
+      var address_request;
+      var socket = io();
+      var i = 0, j = 0;
+
+      function checkform()
+      {
+        var f1 = document.forms["theform1"].elements;
+        var f2 = document.forms["theform2"].elements;
+        var cansubmit1 = true;
+        var cansubmit2 = true;
+
+        for (var i = 0; i < f1.length; i++)
+        {
+          if (f1[i].value.length == 0) cansubmit1 = false;
+        }
+        for (var j = 0; j < f2.length; j++)
+        {
+          if (f2[j].value.length == 0) cansubmit2 = false;
+        }
+        document.getElementById('submitbutton1').disabled = !cansubmit1;
+        document.getElementById('submitbutton2').disabled = !cansubmit2;
+      }
+
+      function broadcast_seller_info()
+      {
+        address_seller = document.getElementById("producer_address").value;
+        bid_value = document.getElementById("base_value").value;
+        socket.emit('broadcast_seller_info', {address : address_seller, base : bid_value});
+      }
+
+      function bid_for_producer_0()
+      {
+        socket.emit('bid_for_producer_0', consumer_address);
+      }
+      function bid_for_producer_1()
+      {
+        socket.emit('bid_for_producer_1', consumer_address);
+      }
+      function bid_for_producer_2()
+      {
+        socket.emit('bid_for_producer_2', consumer_address);
+      }
+      function bid_for_producer_3()
+      {
+        socket.emit('bid_for_producer_3', consumer_address);
+      }
+      function bid_for_producer_4()
+      {
+        socket.emit('bid_for_producer_4', consumer_address);
+      }
+      function bid_for_producer_5()
+      {
+        socket.emit('bid_for_producer_5', consumer_address);
+      }
+
+      function Enter_bid()
+      {
+        consumer_address = document.getElementById("consumer_address").value;
+      }
+
+      function close_connection()
+      {
+        socket.emit('close_connection');
+      }
+
+      socket.on('update_marketplace', function(data)
+      {
+        document.getElementById("producer0").innerHTML = data.add0;
+        document.getElementById("producer1").innerHTML = data.add1;
+        document.getElementById("producer2").innerHTML = data.add2;
+        document.getElementById("producer3").innerHTML = data.add3;
+        document.getElementById("producer4").innerHTML = data.add4;
+        document.getElementById("producer5").innerHTML = data.add5;
+        document.getElementById("latest_bid0").innerHTML = data.bid0;
+        document.getElementById("latest_bid1").innerHTML = data.bid1;
+        document.getElementById("latest_bid2").innerHTML = data.bid2;
+        document.getElementById("latest_bid3").innerHTML = data.bid3;
+        document.getElementById("latest_bid4").innerHTML = data.bid4;
+        document.getElementById("latest_bid5").innerHTML = data.bid5;
+        document.getElementById("consumer0").innerHTML = data.add6;
+        document.getElementById("consumer1").innerHTML = data.add7;
+        document.getElementById("consumer2").innerHTML = data.add8;
+        document.getElementById("consumer3").innerHTML = data.add9;
+        document.getElementById("consumer4").innerHTML = data.add10;
+        document.getElementById("consumer5").innerHTML = data.add11;
+        document.getElementById("Etoken0").innerHTML = data.tok0;
+        document.getElementById("Etoken1").innerHTML = data.tok1;
+        document.getElementById("Etoken2").innerHTML = data.tok2;
+        document.getElementById("Etoken3").innerHTML = data.tok3;
+        document.getElementById("Etoken4").innerHTML = data.tok4;
+        document.getElementById("Etoken5").innerHTML = data.tok5;
+      });
+
+    </script>
+
+  </body>
+</html>

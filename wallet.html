@@ -1,0 +1,193 @@
+<!--  @file       wallet.html
+*     @authors    Saurabh Gupta     [saurabh.gupta1002@gmail.com]
+*                 Awadhut Thube     [awadhutthube@gmail.com]
+*                 Jheel Nagaria     [nagariajheel@gmail.com]
+*                 Ashish Kamble     [ashishkamble14@gmail.com]
+*-->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>CoE Blockchain</title>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="./public/css/bootstrap.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+		<link href="./public/css/font-awesome.min.css" rel="stylesheet">
+		<link href="./public/css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container"></div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><img src="./public/images/oldlogo.png" alt="CoE Blockchain" width="122" height="60"></a></div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="defaultNavbar1">
+					<ul class="nav navbar-nav navbar-right">
+						<!-- Enter your IP Address. Leave the port number same. -->
+						<li><a href="http://192.168.43.50:4000">Go to Energy Marketplace</a></li>
+						<li><a href="http://localhost:3000">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Wallet</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-xs-12">
+						<div class="card">
+							<h3 id="my_Etokens"></h3>
+							<p align="center">Energy tokens</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<div class="card">
+							<h3 id="current_generation"></h3>
+							<p align="center">Current Generation</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<div class="card">
+							<h3 id="ether_balance"></h3>
+							<p align="center">Account Balance</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="sub-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-4">
+						<h2 class="alt-h2">Pending Transactions</h2>
+					</div>
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="text-align:center">Transaction Number</th>
+										<th style="text-align:center">Transaction Hash</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td align="center">1</td>
+										<td align="center" id = "trans_hash1"></td>
+									</tr>
+									<tr>
+										<td align="center">2</td>
+										<td align="center" id = "trans_hash2"></td>
+									</tr>
+									<tr>
+										<td align="center">3</td>
+										<td align="center" id = "trans_hash3"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						<h2 class="alt-h2">Ethereum Mining Options</h2>
+						<button class="btn btn-secondary" onclick="startmine()">Start Mining</button>
+						&nbsp; &nbsp; &nbsp; &nbsp; 
+						<button class="btn btn-danger" onclick="stopmine()">Stop Mining</button>
+						<hr></hr>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Modal -->
+		<div id="transactions" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="col-xs-4">
+						<h2 class="alt-h2">Ethereum Wallet Transaction</h2>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="To Account" id="To_address">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Ether Amount" id="Value">
+						</div>
+					</div>
+					<br></br>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal" onclick="basic_tx();">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="./public/js/jquery-1.11.3.min.js"></script>
+
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="./public/js/bootstrap.js"></script>
+		<script src="./public/js/script.js"></script>
+		<script src="./consumer.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/node_modules/web3/dist/web3.min.js"></script>
+
+		<script>
+			var energy_KWH;
+			var energy_tokens;
+			var socket = io();
+
+			function startmine()
+			{
+				socket.emit('startmine', 'user');
+			}
+
+			function stopmine()
+			{
+				socket.emit('stopmine', 'user');
+			}
+
+			setInterval(function()
+			{
+				document.getElementById("current_generation").innerHTML = energy_KWH;
+				document.getElementById("my_Etokens").innerHTML = energy_tokens;
+				document.getElementById("ether_balance").innerHTML = ether_balance;
+			}, 1000);
+
+			socket.on('pending_tx_list', function(data)
+			{
+				var tx_1 = data.tx_1;
+				var tx_2 = data.tx_2;
+				var tx_3 = data.tx_3;
+				document.getElementById("trans_hash1").innerHTML = tx_1;
+				document.getElementById("trans_hash2").innerHTML = tx_2;
+				document.getElementById("trans_hash3").innerHTML = tx_3;
+			});
+
+			socket.on('energy_token_balance', function (data)
+			{
+				energy_KWH = data.energy;
+				energy_tokens = data.tok;
+				ether_balance = data.bal;
+			})
+
+			function basic_tx()
+			{
+				var to_address = document.getElementById("To_address").value;
+				var value = document.getElementById("Value").value;
+				socket.emit('basic_tx', {add:to_address, val:value});
+			}
+		</script>
+	</body>
+</html>

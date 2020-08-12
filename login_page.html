@@ -1,0 +1,158 @@
+<!--  @file       login_page.html
+*     @authors    Saurabh Gupta     [saurabh.gupta1002@gmail.com]
+*                 Awadhut Thube     [awadhutthube@gmail.com]
+*                 Jheel Nagaria     [nagariajheel@gmail.com]
+*                 Ashish Kamble     [ashishkamble14@gmail.com]
+*-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CoE Blockchain</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./consumer.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/node_modules/web3/dist/web3.min.js"></script>
+
+    <style>
+    body
+    {
+        font: 20px Montserrat, sans-serif;
+        line-height: 1.8;
+        color: #f5f6f7;
+    }
+
+    .margin {margin-bottom: 20px;}
+    .bg-1
+    {
+        font-size: 40px;
+        background-color: #1abc9c; /* Green */
+        background-image:url('./public/images/blue-bg.jpg');
+        background-size: 100% 100%;
+        color: #ffffff;
+    }
+    .bg-2
+    {
+        font-size: 20px;
+        background-color: #474e5d; /* Dark Blue */
+        color: #ffffff;
+    }
+    .bg-3
+    {
+        background-color: #ffffff; /* White */
+        color: #555555;
+    }
+    .bg-4
+    {
+        background-color: #2f2f2f; /* Black Gray */
+        color: #fff;
+    }
+    .container-fluid
+    {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    .navbar
+    {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 20px;
+        letter-spacing: 5px;
+        background-color:#B9D2DF;
+    }
+    .navbar-nav  li a:hover
+    {
+        color: #1308b3 !important;
+    }
+    .mybutton
+    {
+        background-color: #1308b3; /* Blue */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 26px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown">Login to Ethereum Wallet<b class="caret"></b></a>
+                <ul class="dropdown-menu" style="padding: 15px;min-width: 350px;">
+                  <li>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <form class="form" role="form" method="get" action="enter_wallet" accept-charset="UTF-8" id="login-nav">
+                          <div class="form-group">
+                            <label class="sr-only" for="exampleInputEmail2">Account address</label>
+                            <input type="text" class="form-control" id="userInput" placeholder="Account address" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                            <input type="password" class="form-control" id="passphrase" placeholder="Password" required>
+                          </div>
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-success btn-block" onclick="submit();">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- First Container -->
+    <div class="container-fluid bg-1 text-center" style="height: 800px;">
+      <br/>
+      <img src="./public/images/oldlogo.png" class="img-responsive img-circle margin" style="display:inline"  width="300" height="300">
+      <br/>
+
+      <p>Peer to Peer Energy Trading using Blockchain</p>
+      <h>CoE-CNDS, VJTI</h>
+      <br></br>
+      <br></br>
+      <a href = "https://gitlab.com/JheelNagaria/CoE-Blockchain" style="color:white"><p> Github Repository </p></a>
+      <br/>
+    </div>
+  </body>
+  
+  <script>
+    var socket = io();
+    function submit()
+    {
+      var input = document.getElementById("passphrase").value;
+      socket.emit('check_passphrase', input);
+    }
+    socket.on('unlock_ethereum_account_result', function(data)
+    {
+      document.getElementById("status").innerHTML = data;
+    });
+  </script>
+
+  <a href="enter_wallet"> <br><br> <p id="status"> </p><br> </a>
+</html>
