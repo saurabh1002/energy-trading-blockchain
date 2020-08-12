@@ -1,10 +1,10 @@
 # Software Installation and Startup Guide
-- [Software Installation and Startup Guide](#software-installation-and-startup-guide)
-      - [1. Node.js](#1-nodejs)
-      - [2. Ethereum Blockchain Client (Command Line Interface)](#2-ethereum-blockchain-client-command-line-interface)
-      - [3. DC Energy Meter Drivers](#3-dc-energy-meter-drivers)
-      - [4. Arduino IDE](#4-arduino-ide)
-      - [5. Smart Contract Deployment](#5-smart-contract-deployment)
+- [Software Installation and Startup Guide](#software-installation-and-startup-guide)<br>
+      - [1. Node.js](#1-nodejs)<br>
+      - [2. Ethereum Blockchain Client (Command Line Interface)](#2-ethereum-blockchain-client-command-line-interface)<br>
+      - [3. DC Energy Meter Drivers](#3-dc-energy-meter-drivers)<br>
+      - [4. Arduino IDE](#4-arduino-ide)<br>
+      - [5. Smart Contract Deployment](#5-smart-contract-deployment)<br>
   
 #### 1. Node.js
 Download *Node.js* for your respective Operating System from [here](https://nodejs.org/en/download/). (This project requires [Node.js](https://nodejs.org/) v6+ to run.)
@@ -39,7 +39,7 @@ Open a terminal from within the cloned package directory and run the following c
     $ mv geth-alltools-darwin-amd64-1.5.8-f58fb322 Geth
     ```
 2. Geth Initialization
-    Create a Private Network with a custom genesis block provided to you.
+    Create a Private Network with a custom genesis block provided to you.<br>
     This command will output "*Successfully wrote genesis block*"  on the console.
     ```sh
     $ ./Geth/geth init genesis.json 
@@ -102,8 +102,8 @@ Open a terminal from within the cloned package directory and run the following c
     > exit
     ```
 4. Connecting two users on the same private network
-Ensure that both the users are on the same local network and are initialized with the same *genesis.json* file.
-Exchange the enode data of both users from the `admin.nodeInfo` command output.
+Ensure that both the users are on the same local network and are initialized with the same *genesis.json* file.<br>
+Exchange the enode data of both users from the `admin.nodeInfo` command output.<br>
 Add a peer using the exchanged enodes by the following command.
     ```Go
     > admin.addPeer("enode://other_users_enode_hex@other_users_ip_address:30303")
@@ -113,8 +113,7 @@ Add a peer using the exchanged enodes by the following command.
     ```
     Once connected, you will see `Block Syncronization Started` on console.
 
-5. Allocate Ether to your accounts in `genesis.json` file.
-    By default, every account created in the private network has zero balance. To generate Ether, one needs to mine for long period of time or else, one can edit the `genesis.json` file to allocate a starting balance to any account id.
+5. Allocate Ether to your accounts in `genesis.json` file. <br>By default, every account created in the private network has zero balance. To generate Ether, one needs to mine for long period of time or else, one can edit the `genesis.json` file to allocate a starting balance to any account id.
 
     To allocate a starting balance, add the following lines in the [genesis.json](genesis.json) file.
     ```
