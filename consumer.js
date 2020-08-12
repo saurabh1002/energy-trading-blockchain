@@ -21,6 +21,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var other_servers = require('socket.io-client'); // This is a client connecting to the SERVER 2 (MAIN SERVER)
+// Replace IP adress with that of the machine running the main server
 var main_server = other_servers.connect('http://192.168.43.50:4000', {reconnect: true});
 
 // Setup Serial Connection with Arduino Nano to control relay
