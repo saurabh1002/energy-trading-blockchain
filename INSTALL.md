@@ -45,13 +45,13 @@ Open a terminal from within the cloned package directory and run the following c
     ```
     To start the geth CLI console enter the following command.
     ```sh
-    $ ./Geth/geth --rpc --rpcapi="eth,web3,miner,personal" --rpcaddr="localhost" --rpcport="8545" --rpccorsdomain="*" console
+    $ ./Geth/geth --rpc --rpcapi="eth,web3,miner,net,personal" --rpcaddr="localhost" --rpcport="8545" --rpccorsdomain="*" console
     ```
     Now you will have entered the ethereum console, where you can type geth commands on lines that start with this:
     ```
     >
     ```
-    c
+
 3. Geth Basic Commands
     The following commands can be given to the ethereum console.
     a. Create a new account (Remember the passphrase of each new account created along with its hexadecimal address).
@@ -62,7 +62,7 @@ Open a terminal from within the cloned package directory and run the following c
     b. Show all account addresses
     ```Go
     > eth.accounts
-    [output] ["0x........................................", "0x........................................", "0x........................................"]
+    [output] ["0x........................................"]
     ```
     c. Show a particular account address
     ```Go
@@ -85,7 +85,6 @@ Open a terminal from within the cloned package directory and run the following c
     f. Mining operations
     ```Go
     > miner.start()
-    [output] "DAG Generation ..."
     [output] "Mined potential block with 'x' transactions"
     > miner.stop()
     ```
