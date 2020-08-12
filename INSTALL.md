@@ -4,6 +4,7 @@
       - [2. Ethereum Blockchain Client (Command Line Interface)](#2-ethereum-blockchain-client-command-line-interface)
       - [3. DC Energy Meter Drivers](#3-dc-energy-meter-drivers)
       - [4. Arduino IDE](#4-arduino-ide)
+      - [5. Smart Contract Deployment](#5-smart-contract-deployment)
   
 #### 1. Node.js
 Download *Node.js* for your respective Operating System from [here](https://nodejs.org/en/download/). (This project requires [Node.js](https://nodejs.org/) v6+ to run.)
@@ -112,10 +113,10 @@ Add a peer using the exchanged enodes by the following command.
     ```
     Once connected, you will see `Block Syncronization Started` on console.
 
-5. Allocate Ether to your accounts in `genesis.json` file
+5. Allocate Ether to your accounts in `genesis.json` file.
     By default, every account created in the private network has zero balance. To generate Ether, one needs to mine for long period of time or else, one can edit the `genesis.json` file to allocate a starting balance to any account id.
 
-    To allocate a starting balance, add the following lines in the `genesis.json` file.
+    To allocate a starting balance, add the following lines in the [genesis.json](genesis.json) file.
     ```
     "alloc":
         {
@@ -131,13 +132,16 @@ Add a peer using the exchanged enodes by the following command.
 
 
 #### 3. DC Energy Meter Drivers
-Install the USB Serial port drivers for retrieving data from the [Everon DC Energy Meters](https://www.everon.in/solar-energy-meter-data-logger.html).
+* Install the USB Serial port drivers for retrieving data from the [Everon DC Energy Meters](https://www.everon.in/solar-energy-meter-data-logger.html).
 
-**.exe** installation files are provided in the `Softwares/DC_Energy_Meter/` folder in compressed format.
+* **.exe** installation files are provided in the `Softwares/DC_Energy_Meter/` folder in compressed format.
 
-Any RS232 serial port driver will work in case .exe files are not supported on your OS.
+* Any RS232 serial port driver will work in case .exe files are not supported on your OS.
 
 #### 4. Arduino IDE
-Install the suitable version of Arduino IDE for your OS from [here](https://www.arduino.cc/en/main/software).
+* Install the suitable version of Arduino IDE for your OS from [here](https://www.arduino.cc/en/main/software).
 
-This is required to program and control the custom made relay circuit using [Arduino Nano](https://store.arduino.cc/usa/arduino-nano) fitted inside the energy meter to control the conn
+* This is required to program and control the custom made relay circuit using [Arduino Nano](https://store.arduino.cc/usa/arduino-nano) fitted inside the energy meter to control the conn
+
+#### 5. Smart Contract Deployment
+* Read [this](SMART_CONTRACT.md) to learn how to deploy a smart contract on your private network.
